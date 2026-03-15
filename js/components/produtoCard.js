@@ -2,7 +2,7 @@ export function criarProdutoCard(produto){
     return `
 
     <div class="produto-card">
-        <img src="${produto.image}"></img>
+        <img src="${produto.image}" width="100">
 
         <h3>${produto.title}</h3>
 
@@ -13,6 +13,6 @@ export function criarProdutoCard(produto){
         </button>
 
     </div>
-    
+
     `
 }
