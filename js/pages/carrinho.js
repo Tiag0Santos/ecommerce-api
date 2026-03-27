@@ -7,30 +7,28 @@ import {
 
 async function buscarProdutos() {
     const res = await
-    fetch("http://fakestoreapi.com/products")
+    fetch("https://fakestoreapi.com/products")
     return await res.json()    
 }
 
 async function renderizarCarrinho() {
-    const carrinho = obterCarrinho()
-    const produtos = await buscarProdutos()
 
+    const carrinho = obterCarrinho()
     const container = document.getElementById("carrinho-container")
 
     container.innerHTML = ""
 
     carrinho.forEach(item => {
-        const produto = produtos.find(p => p.id === item.id)
 
         container.innerHTML += `
         
         <div class="item">
             
-            <img src="${produto.image} width="80">
+            <img src="${item.image}" width="80">
             
-            <h3>${produto.title}</h3>
+            <h3>${item.title}</h3>
            
-            <p>R$ ${produto.price}</p>
+            <p>R$ ${item.price}</p>
 
             <div>
                 <button onclick="diminuir(${item.id})">-</button>
@@ -41,10 +39,38 @@ async function renderizarCarrinho() {
             <button onclick="remover(${item.id})">Remover</button>
         </div>  
         
-        `
-        
+        `        
     })
 
-    calcularTotal(produtos, carrinho)
+    calcularTotal(carrinho)
     
 }
+
+function calcularTotal(carrinho){
+
+    let total = 0
+
+    carrinho.forEach(item => {
+
+        total += item.price * item.quantidade
+    })
+
+    document.getElementById("total").innerHTML = "Total: R$ " + total.toFixed(2)
+}
+
+window.aumentar = (id) => {
+    aumentarQuantidade(id)
+    renderizarCarrinho()
+}
+
+window.diminuir = (id) => {
+    diminuirQuantidade(id)
+    renderizarCarrinho()
+}
+
+window.remover = (id) => {
+    removerProduto(id)
+    renderizarCarrinho()
+}
+
+renderizarCarrinho()

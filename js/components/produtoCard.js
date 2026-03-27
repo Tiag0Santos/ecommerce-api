@@ -1,4 +1,4 @@
-export function criarProdutoCard(produto){
+export function produtoCard(produto){
     return `
 
     <div class="produto-card">
@@ -8,7 +8,7 @@ export function criarProdutoCard(produto){
 
         <p>R$ ${produto.price}</p>
 
-        <button data-id="${produto.id}">
+        <button class="btn-add" data-id="${produto.id}">
             Adicionar ao carrinho
         </button>
 

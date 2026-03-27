@@ -5,7 +5,7 @@ export function obterCarrinho(){
     return carrinho
 }
 
-export function adicionarCarrinho(produto){
+export function adicionarProduto(produto){
 
     const item = carrinho.find(p => p.id === produto.id)
 
@@ -13,8 +13,11 @@ export function adicionarCarrinho(produto){
         item.quantidade++
     }else{
         carrinho.push({
-            ...produto,
-            quantidade:1
+            id: produto.id,
+            title: produto.title,
+            price: produto.price,
+            image: produto.image,
+            quantidade: 1
         })
     }
 

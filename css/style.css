@@ -32,6 +32,14 @@ button{
     cursor: pointer;
 }
 
+.item{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
 @media(max-width: 768){
     
     #lista-produtos{
