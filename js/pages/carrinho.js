@@ -2,7 +2,8 @@ import {
     obterCarrinho,
     aumentarQuantidade,
     diminuirQuantidade,
-    removerProduto
+    removerProduto,
+    quantidadeTotal
 } from "../services/carrinhoService.js"
 
 async function buscarProdutos() {
@@ -58,19 +59,28 @@ function calcularTotal(carrinho){
     document.getElementById("total").innerHTML = "Total: R$ " + total.toFixed(2)
 }
 
+function atualizarContador() {
+
+    document.getElementById("contador").innerText = quantidadeTotal()
+}
+
 window.aumentar = (id) => {
     aumentarQuantidade(id)
     renderizarCarrinho()
+    atualizarContador()
 }
 
 window.diminuir = (id) => {
     diminuirQuantidade(id)
     renderizarCarrinho()
+    atualizarContador()
 }
 
 window.remover = (id) => {
     removerProduto(id)
     renderizarCarrinho()
+    atualizarContador()
 }
 
 renderizarCarrinho()
+atualizarContador()

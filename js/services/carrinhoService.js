@@ -42,7 +42,7 @@ export function diminuirQuantidade(id){
     }
 }
 
-export function removerProduto(){
+export function removerProduto(id){
     carrinho = carrinho.filter(p => p.id !== id)
 
     salvarCarrinho()
@@ -51,4 +51,10 @@ export function removerProduto(){
 function salvarCarrinho(){
 
     localStorage.setItem("carrinho",JSON.stringify(carrinho))
+}
+
+export function quantidadeTotal(){
+    return carrinho.reduce((total, item) => {
+        return total + item.quantidade
+    }, 0)
 }
