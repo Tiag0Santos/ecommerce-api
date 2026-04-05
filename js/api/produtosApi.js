@@ -1,8 +1,9 @@
-export async function buscarProdutos() {
+export async function buscarProdutos(){
 
-    const resposta = await
-    fetch("https://fakestoreapi.com/products")
+  const res = await fetch("https://dummyjson.com/products")
 
-    return await resposta.json()
+  const data = await res.json()
+
+  return data.products
 
 }
