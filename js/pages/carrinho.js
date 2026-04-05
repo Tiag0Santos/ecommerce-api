@@ -6,12 +6,6 @@ import {
     quantidadeTotal
 } from "../services/carrinhoService.js"
 
-async function buscarProdutos() {
-    const res = await
-    fetch("https://fakestoreapi.com/products")
-    return await res.json()    
-}
-
 async function renderizarCarrinho() {
 
     const carrinho = obterCarrinho()
@@ -25,7 +19,7 @@ async function renderizarCarrinho() {
         
         <div class="item">
             
-            <img src="${item.image}" width="80">
+            <img src="${item.images[0]}" width="80">
             
             <h3>${item.title}</h3>
            
