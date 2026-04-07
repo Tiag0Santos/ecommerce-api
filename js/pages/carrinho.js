@@ -11,31 +11,42 @@ async function renderizarCarrinho() {
     const carrinho = obterCarrinho()
     const container = document.getElementById("carrinho-container")
 
-    container.innerHTML = ""
+    if(carrinho.length === 0){
+        container.innerHTML = "Carrinho vazio 🛒"
+        return
+    }
+
+    let html = ""
 
     carrinho.forEach(item => {
 
-        container.innerHTML += `
+        html += `
         
         <div class="item">
             
-            <img src="${item.images[0]}" width="80">
+            <img src="${item.images ? item.images[0] : item.image}" width="80">
             
             <h3>${item.title}</h3>
            
             <p>R$ ${item.price}</p>
 
             <div>
-                <button onclick="diminuir(${item.id})">-</button>
+                <button class="btn-diminuir" data-id="${item.id}">
+                -</button>
                 ${item.quantidade}
-                <button onclick="aumentar(${item.id})">+</button>
+                <button class="btn-aumentar" data-id="${item.id}">
+                +</button>
             </div>
 
-            <button onclick="remover(${item.id})">Remover</button>
+            <button class="btn-remover" data-id="${item.id}">
+                Remover
+            </button>
         </div>  
         
         `        
     })
+
+    container.innerHTML = html
 
     calcularTotal(carrinho)
     
@@ -55,26 +66,37 @@ function calcularTotal(carrinho){
 
 function atualizarContador() {
 
-    document.getElementById("contador").innerText = quantidadeTotal()
+    const contador = document.getElementById("contador")
+
+    if(contador){
+        contador.innerText = quantidadeTotal()
+    }    
+    
 }
 
-window.aumentar = (id) => {
+document.addEventListener("click", (e) => {
+
+  const id = Number(e.target.dataset.id)
+
+  if(e.target.classList.contains("btn-aumentar")){
     aumentarQuantidade(id)
     renderizarCarrinho()
     atualizarContador()
-}
+  }
 
-window.diminuir = (id) => {
+  if(e.target.classList.contains("btn-diminuir")){
     diminuirQuantidade(id)
     renderizarCarrinho()
     atualizarContador()
-}
+  }
 
-window.remover = (id) => {
+  if(e.target.classList.contains("btn-remover")){
     removerProduto(id)
     renderizarCarrinho()
     atualizarContador()
-}
+  }
+
+})
 
 renderizarCarrinho()
 atualizarContador()

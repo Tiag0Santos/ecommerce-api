@@ -3,43 +3,64 @@ import { produtoCard } from "../components/produtoCard.js"
 import { adicionarProduto } from "../services/carrinhoService.js"
 import { quantidadeTotal } from "../services/carrinhoService.js"
 
+let produtosGlobais = []
+
 async function carregarProdutos() {
+
+    const container = document.getElementById("produtos")
+
+    container.innerHTML = "Carregando..."
 
     const produtos = await buscarProdutos()
 
-    const container = document.querySelector("#produtos")
+    produtosGlobais = produtos
+
+    let html = ""
 
     produtos.forEach(produto => {
 
-        container.innerHTML +=
-        produtoCard(produto)
+        html += `
+
+            <div class="produto-card">
+
+                <a href="produto.html?id=${produto.id}">
+                    <img src="${produto.images ? produto.images[0] : produto.image}" width="80">
+                    <h3>${produto.title}</h3>
+                </a>
+
+                <p>R$ ${produto.price}</p>
+
+                <button class="btn-add" data-id="${produto.id}">
+                    Adicionar
+                </button>
+
+            </div>
+    `
+  })
+
+        container.innerHTML = html
         
-    })
+    }
 
-    adicionarEventos(produtos)
-    
-}
+    document.addEventListener("click", (e) => {
 
-function adicionarEventos(produtos) {
+        if(e.target.classList.contains("btn-add")){
 
-    const botoes = document.querySelectorAll(".btn-add")
+            const id = Number(e.target.dataset.id)
 
-    botoes.forEach(botao => {
-
-        botao.addEventListener("click", () => {
-
-            const id = Number(botao.dataset.id)
-
-            const produto = produtos.find(p => p.id === id)
+            const produto = produtosGlobais.find(p => p.id === id)
 
             adicionarProduto(produto)
 
-            atualizarContador()
+            alert("Produto adicionado 🛒")
 
-            alert("Produto adicionado ao carrinho")
-        })
+            atualizarContador()
+        }
+
     })
-}
+
+    carregarProdutos()
+    
 
 function atualizarContador() {
     

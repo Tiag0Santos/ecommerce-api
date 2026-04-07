@@ -16,7 +16,7 @@ export function adicionarProduto(produto){
             id: produto.id,
             title: produto.title,
             price: produto.price,
-            image: produto.image,
+            images: produto.images || [produto.image],
             quantidade: 1
         })
     }

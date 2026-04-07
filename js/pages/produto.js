@@ -10,8 +10,8 @@ function pegarId(){
 
 async function renderizarProduto(){
 
-    const id = pegarId()
     const produtos = await buscarProdutos()
+    const id = pegarId()
 
     const produto = produtos.find(p => p.id === id)
 
@@ -26,13 +26,13 @@ async function renderizarProduto(){
 
       <div class="produto-detalhe">
 
-        <img src="${produto.images[0]}" width="200">
+        <img src="${produto.images ? produto.images[0] : produto.image}" width="200">
 
         <h2>${produto.title}</h2>
 
         <p>R$ ${produto.price}</p>
 
-        <button id="btn-add">
+        <button class="btn-add" data-id="${produto.id}">
             Adicionar ao carrinho
         </button>
 
@@ -40,11 +40,22 @@ async function renderizarProduto(){
 
     `
 
-    document.getElementById("btn-add").addEventListener("click", () => {
-        adicionarProduto(produto)
-        alert("Produto adicionado")
-        
+    document.addEventListener("click", async (e) => {
+
+        if(e.target.classList.contains("btn-add")){
+
+            const id = Number(e.target.dataset.id)
+
+            const produtos = await buscarProdutos()
+            const produto = produtos.find(p => p.id === id)
+
+            adicionarProduto(produto)
+
+            alert("Produto adicionado 🛒")
+        }
+
     })
+
 }
 
 renderizarProduto()
