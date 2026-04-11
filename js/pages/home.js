@@ -5,69 +5,95 @@ import { quantidadeTotal } from "../services/carrinhoService.js"
 
 let produtosGlobais = []
 
-async function carregarProdutos() {
+function renderizarProdutos(produtos) {
 
     const container = document.getElementById("produtos")
 
+    if(!container) return
+
+        if(produtos.length === 0){
+            container.innerHTML = "Nenhum produto encontrado"
+            return
+        }
+
+    let html = ""
+
+    produtos.forEach(produto => {
+
+        html += produtoCard(produto)
+    })
+
+    container.innerHTML = html
+        
+}
+
+document.addEventListener("click", (e) => {
+
+    const botao = e.target.closest(".btn-add")
+
+    if(botao){
+
+        const id = Number(botao.dataset.id)
+
+        const produto = produtosGlobais.find(p => p.id === id)
+
+        if(!produto) return
+
+        adicionarProduto(produto)
+
+        alert("Produto adicionado 🛒")
+
+        atualizarContador()
+    }
+
+})
+
+async function carregarProdutos(){
+
+    const container = document.getElementById("produtos")
     container.innerHTML = "Carregando..."
 
     const produtos = await buscarProdutos()
 
     produtosGlobais = produtos
 
-    let html = ""
+    renderizarProdutos(produtos)
+}
 
-    produtos.forEach(produto => {
+let timeout
 
-        html += `
+const inputBusca = document.getElementById("input-busca")
 
-            <div class="produto-card">
+    if(inputBusca){
 
-                <a href="produto.html?id=${produto.id}">
-                    <img src="${produto.images ? produto.images[0] : produto.image}" width="80">
-                    <h3>${produto.title}</h3>
-                </a>
+        inputBusca.addEventListener("input", (e) => {
 
-                <p>R$ ${produto.price}</p>
+            clearTimeout(timeout)
 
-                <button class="btn-add" data-id="${produto.id}">
-                    Adicionar
-                </button>
+            timeout = setTimeout(async () => {
+            
+                const valor = e.target.value.trim()
 
-            </div>
-    `
-  })
+                const container = document.getElementById("produtos")
+                container.innerHTML = "Buscando..."
 
-        container.innerHTML = html
-        
+                const produtos = await buscarProdutos(valor)
+
+                produtosGlobais = produtos
+
+                renderizarProdutos(produtos)
+
+            }, 500)
+        })
     }
-
-    document.addEventListener("click", (e) => {
-
-        if(e.target.classList.contains("btn-add")){
-
-            const id = Number(e.target.dataset.id)
-
-            const produto = produtosGlobais.find(p => p.id === id)
-
-            adicionarProduto(produto)
-
-            alert("Produto adicionado 🛒")
-
-            atualizarContador()
-        }
-
-    })
-
-    carregarProdutos()
-    
 
 function atualizarContador() {
     
     const contador = document.getElementById("contador")
 
-    contador.innerText = quantidadeTotal()
-
+    if(contador){
+        contador.innerText = quantidadeTotal()
+    }
 }
 
 carregarProdutos()
