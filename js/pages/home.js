@@ -4,6 +4,7 @@ import { adicionarProduto } from "../services/carrinhoService.js"
 import { quantidadeTotal } from "../services/carrinhoService.js"
 
 let produtosGlobais = []
+let produtosOriginais = []
 
 function renderizarProdutos(produtos) {
 
@@ -46,6 +47,15 @@ document.addEventListener("click", (e) => {
         atualizarContador()
     }
 
+    const botaoCategoria = e.target.closest(".btn-categoria")
+
+    if(botaoCategoria){
+
+        const categoria = botaoCategoria.dataset.categoria
+
+        filtrarPorCategoria(categoria)
+    }
+
 })
 
 async function carregarProdutos(){
@@ -56,8 +66,26 @@ async function carregarProdutos(){
     const produtos = await buscarProdutos()
 
     produtosGlobais = produtos
+    produtosOriginais = produtos
 
     renderizarProdutos(produtos)
+}
+
+function filtrarPorCategoria(categoria){
+
+    if(categoria === "todos"){
+        produtosGlobais = produtosOriginais
+        renderizarProdutos(produtosOriginais)
+        return
+    }
+
+    const produtosFiltrados = produtosOriginais.filter(produto => 
+        produto.category === categoria
+    )
+
+    produtosGlobais = produtosFiltrados
+
+    renderizarProdutos(produtosFiltrados)
 }
 
 let timeout
