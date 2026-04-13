@@ -69,6 +69,7 @@ async function carregarProdutos(){
     produtosOriginais = produtos
 
     renderizarProdutos(produtos)
+    quantidadePorCategoria()
 }
 
 function filtrarPorCategoria(categoria){
@@ -86,6 +87,31 @@ function filtrarPorCategoria(categoria){
     produtosGlobais = produtosFiltrados
 
     renderizarProdutos(produtosFiltrados)
+}
+
+function quantidadePorCategoria(){
+
+    const botoes = document.querySelectorAll(".btn-categoria")
+
+    botoes.forEach(botao => {
+
+        const categoria = botao.dataset.categoria
+
+        if(categoria === "todos"){
+            botao.innerText = `Todos (${produtosOriginais.length})`
+            return
+        }
+
+        const quatidade = produtosOriginais.filter(produto =>
+            produto.category === categoria
+        ).length
+
+        botao.innerText = `${botao.dataset.nome} (${quatidade})`
+
+        if (quatidade === 0){
+            botao.style.opacity = "0.5"
+        }
+    })
 }
 
 let timeout
