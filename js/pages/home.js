@@ -28,6 +28,25 @@ function renderizarProdutos(produtos) {
         
 }
 
+let toastTimeout
+
+function mostrarToast(mensagem){
+
+    const toast = document.getElementById("toast")
+
+    if(!toast) return
+
+    toast.innerText = mensagem
+
+    toast.classList.add("show")
+
+    clearTimeout(toastTimeout)
+
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove("show")
+    }, 3000)
+}
+
 document.addEventListener("click", (e) => {
 
     const botao = e.target.closest(".btn-add")
@@ -42,7 +61,7 @@ document.addEventListener("click", (e) => {
 
         adicionarProduto(produto)
 
-        alert("Produto adicionado 🛒")
+        mostrarToast("Produto adicionado ao carrinho🛒")
 
         atualizarContador()
     }

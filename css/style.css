@@ -107,6 +107,26 @@ nav a {
   background: #f7ca00;
 }
 
+.toast {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #ffd814; 
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 @media (max-width: 768) {
   #lista-produtos {
     grid-template-columns: 1fr 1fr;
