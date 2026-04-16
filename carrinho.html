@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/carrinho.css">
 </head>
 <body>
+    <header>
+        <h1>Mini E-commerce</h1>
+        <nav>
+            <a href="index.html">Produtos</a>
+            <a href="carrinho.html">
+                Carrinho (<span id="contador">0</span>)
+            </a>
+            <input type="text" id="input-busca" placeholder="Buscar produtos...">
+        </nav>
+    </header>
     <h1>Carrinhos de Compas</h1>
 
     <div id="carrinho-container"></div>
@@ -15,7 +25,6 @@
 
     <a href="index.html">Voltar para loja</a>
 
-    <script type="module" src="./js/pages/carrinho.js"></script>
-    
+    <script type="module" src="./js/pages/carrinho.js"></script>    
 </body>
 </html>

@@ -22,28 +22,38 @@ async function renderizarCarrinho() {
 
         html += `
         
-        <div class="item">
-            
-            <img src="${item.images ? item.images[0] : item.image}" width="80">
-            
-            <h3>${item.title}</h3>
-           
-            <p>R$ ${item.price}</p>
+        <div class="item-carrinho">
 
-            <div>
-                <button class="btn-diminuir" data-id="${item.id}">
-                -</button>
-                ${item.quantidade}
-                <button class="btn-aumentar" data-id="${item.id}">
-                +</button>
+            <img 
+            src="${item.images ? item.images[0] : item.image}" 
+            alt="${item.title}"
+            >
+
+            <div class="info-produto">
+                <h3>${item.title}</h3>
+
+                <p class="preco">R$ ${item.price}</p>
+
+                <div class="controle-quantidade">
+                <button class="btn-diminuir" data-id="${item.id}">-</button>
+
+                <span>${item.quantidade}</span>
+
+                <button class="btn-aumentar" data-id="${item.id}">+</button>
             </div>
 
             <button class="btn-remover" data-id="${item.id}">
                 Remover
             </button>
-        </div>  
-        
-        `        
+            </div>
+
+            <div class="subtotal">
+            <strong>Subtotal</strong>
+            <p>R$ ${(item.price * item.quantidade).toFixed(2)}</p>
+            </div>
+
+        </div>
+    `
     })
 
     container.innerHTML = html

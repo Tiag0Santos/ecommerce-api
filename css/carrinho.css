@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f3f3;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #131921;
+  color: white;
+  padding: 16px 24px;
+}
+
+header h1 {
+  margin: 10px;
+  font-size: 35px;
+}
+
+nav a {
+    margin: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#input-busca {
+  flex: 1;
+  min-width: 250px;
+  max-width: 500px;
+  margin-left: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+main {
+  padding: 30px;
+}
+
+#carrinho-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.item-carrinho img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.info-produto {
+  flex: 1;
+}
+
+.info-produto h3 {
+  margin: 0 0 8px;
+}
+
+.info-produto h3 {
+  margin: 0 0 8px;
+}
+
+.preco {
+  font-size: 18px;
+  font-weight: bold;
+  color: #111;
+}
+
+.controle-quantidade {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.controle-quantidade button {
+  background: #ffd814;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-remover {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.subtotal {
+  text-align: right;
+  min-width: 140px;
+}
+
+.resumo-carrinho {
+  margin-top: 30px;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-finalizar {
+  width: 100%;
+  margin-top: 16px;
+  background: #ffd814;
+  border: none;
+  padding: 14px;
+  border-radius: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .item-carrinho {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .subtotal {
+    text-align: left;
+  }
+}
