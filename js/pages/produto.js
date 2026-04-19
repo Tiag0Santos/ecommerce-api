@@ -1,6 +1,5 @@
 import { adicionarProduto } from "../services/carrinhoService.js"
 import { buscarProdutos } from "../api/produtosApi.js"
-import { quantidadeTotal } from "../services/carrinhoService.js"
 import { mostrarToast, atualizarContador } from "../utils/ui.js"
 
 function pegarId(){

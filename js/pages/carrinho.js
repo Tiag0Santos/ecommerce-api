@@ -15,6 +15,7 @@ async function renderizarCarrinho() {
 
     if(carrinho.length === 0){
         container.innerHTML = "Carrinho vazio 🛒"
+        container.style.textAlign = 'center'
         const resumo = document.getElementById("resumo-carrinho")
             if(resumo) resumo.style.display = "none"
         return

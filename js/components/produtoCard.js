@@ -2,7 +2,7 @@ export function produtoCard(produto){
     return `
 
         <div class="produto-card">
-            <a href="produto.html?id=${produto.id}">
+            <a href="detalhe-produto.html?id=${produto.id}">
                 <img src="${produto.images[0]}" width="80">
                 <h3>${produto.title}</h3>
             </a>
