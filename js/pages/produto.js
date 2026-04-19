@@ -1,10 +1,10 @@
 import { adicionarProduto } from "../services/carrinhoService.js"
 import { buscarProdutos } from "../api/produtosApi.js"
+import { quantidadeTotal } from "../services/carrinhoService.js"
+import { mostrarToast, atualizarContador } from "../utils/ui.js"
 
 function pegarId(){
-
-    const params = new
-    URLSearchParams(window.location.search)
+    const params = new URLSearchParams(window.location.search)
     return Number(params.get("id"))
 }
 
@@ -15,48 +15,41 @@ async function renderizarProduto(){
 
     const produto = produtos.find(p => p.id === id)
 
+    const container = document.getElementById("detalhe-produto")
+
     if(!produto){
-        document.getElementById("produto-detalhe").innerHTML = "Produto não encontrado"
+        container.innerHTML = "Produto não encontrado"
         return
     }
 
-    const container = document.getElementById("produto-detalhe")
-
     container.innerHTML = `
 
-      <div class="produto-detalhe">
-
-        <img src="${produto.images ? produto.images[0] : produto.image}" width="200">
-
-        <h2>${produto.title}</h2>
-
-        <p>R$ ${produto.price}</p>
-
-        <button class="btn-add" data-id="${produto.id}">
-            Adicionar ao carrinho
-        </button>
-
-    </div>
+        <div class="container-produto">
+            <div class="imagem-produto">
+                <img src="${produto.images ? produto.images[0] : produto.image}">
+            </div>
+            <div class="info-produto">
+                <h2>${produto.title}</h2>
+                <p class="preco">R$ ${produto.price}</p>
+                <p class="descricao">${produto.description}</p>
+                <button class="btn-add" id="btn-adicionar">
+                    Adicionar ao carrinho
+                </button>
+            </div>
+        </div>
 
     `
 
-    document.addEventListener("click", async (e) => {
+    const botao = document.getElementById("btn-adicionar")
 
-        if(e.target.classList.contains("btn-add")){
+    botao.addEventListener("click", () => {
+        adicionarProduto(produto)
 
-            const id = Number(e.target.dataset.id)
+        mostrarToast("Produto adicionado ao carrinho🛒")
 
-            const produtos = await buscarProdutos()
-            const produto = produtos.find(p => p.id === id)
-
-            adicionarProduto(produto)
-
-            alert("Produto adicionado 🛒")
-        }
-
+        atualizarContador()
     })
-
 }
 
 renderizarProduto()
-    
+atualizarContador()

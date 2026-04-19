@@ -1,7 +1,7 @@
 import { buscarProdutos } from "../api/produtosApi.js"
 import { produtoCard } from "../components/produtoCard.js"
 import { adicionarProduto } from "../services/carrinhoService.js"
-import { quantidadeTotal } from "../services/carrinhoService.js"
+import { mostrarToast, atualizarContador } from "../utils/ui.js"
 
 let produtosGlobais = []
 let produtosOriginais = []
@@ -26,25 +26,6 @@ function renderizarProdutos(produtos) {
 
     container.innerHTML = html
         
-}
-
-let toastTimeout
-
-function mostrarToast(mensagem){
-
-    const toast = document.getElementById("toast")
-
-    if(!toast) return
-
-    toast.innerText = mensagem
-
-    toast.classList.add("show")
-
-    clearTimeout(toastTimeout)
-
-    toastTimeout = setTimeout(() => {
-        toast.classList.remove("show")
-    }, 3000)
 }
 
 document.addEventListener("click", (e) => {
@@ -159,15 +140,6 @@ const inputBusca = document.getElementById("input-busca")
             }, 500)
         })
     }
-
-function atualizarContador() {
-    
-    const contador = document.getElementById("contador")
-
-    if(contador){
-        contador.innerText = quantidadeTotal()
-    }
-}
 
 carregarProdutos()
 atualizarContador()
