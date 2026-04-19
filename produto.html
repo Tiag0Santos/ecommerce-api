@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini E-commerce</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styleGlobal.css">
+    <link rel="stylesheet" href="/css/produto-detalhe.css">
 </head>
 <body>
     <header>
-        <h1>Detalhes do Produto</h1>        
         <nav>
-            <a href="index.html">Produtos</a>
-            <a href="carrinho.html">
-                Carrinho (<span id="contador">0</span>)
-            </a>
+            <h1>Mini E-commerce</h1>
+            <div>
+                <a href="index.html">Produtos</a>
+                <a href="carrinho.html">
+                Carrinho (<span id="contador">0</span>)</a>
+            </div>  
         </nav>
-    </header>
+    </header>      
     <main>
-        <div id="produto-detalhe"></div>
+        <div class="titulo">
+            <h2>Detalhes do Produto</h2>    
+        </div>         
+        <div id="detalhe-produto"></div>    
     </main>
- 
-<script type="module" src="./js/pages/produto.js"></script>
+    <section>
+        <div id="toast" class="toast"></div>
+    </section>  
+ <script type="module" src="./js/pages/produto.js"></script>
 </body>
 </html>

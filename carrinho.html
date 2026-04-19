@@ -5,26 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho</title>
     <link rel="stylesheet" href="/css/carrinho.css">
+    <link rel="stylesheet" href="/css/styleGlobal.css">
 </head>
 <body>
     <header>
-        <h1>Mini E-commerce</h1>
         <nav>
-            <a href="index.html">Produtos</a>
-            <a href="carrinho.html">
-                Carrinho (<span id="contador">0</span>)
-            </a>
-            <input type="text" id="input-busca" placeholder="Buscar produtos...">
+            <h1>Mini E-commerce</h1>
+            <div>
+                <a href="index.html">Produtos</a>
+                <a href="carrinho.html">
+                Carrinho (<span id="contador">0</span>)</a>
+            </div>  
         </nav>
     </header>
-    <h1>Carrinhos de Compas</h1>
-
-    <div id="carrinho-container"></div>
-
-    <h2 id="total"></h2>
-
-    <a href="index.html">Voltar para loja</a>
-
+    <main>
+        <div class="titulo">
+            <h2>Carrinho de Compras</h2>
+        </div>        
+        <div id="carrinho-container"></div>   
+    </main>
+    <section>
+        <div class="resumo-carrinho" id="resumo-carrinho">
+            <h3>Resumo do pedido</h3>
+            <p>Subtotal: <span id="subtotal">R$ 0,00</span></p>
+            <p>Frete: <span>Grátis</span></p>
+            <h2>Total: <span id="total">R$ 0,00</span></h2>
+            <button class="btn-finalizar">Finalizar compra</button>
+        </div> 
+    </section>
+    <section>
+        <div id="toast" class="toast"></div>
+    </section>  
     <script type="module" src="./js/pages/carrinho.js"></script>    
 </body>
 </html>
