@@ -3,8 +3,10 @@ import {
     aumentarQuantidade,
     diminuirQuantidade,
     removerProduto,
-    quantidadeTotal
+    limparCarrinho
 } from "../services/carrinhoService.js"
+import { mostrarToast, atualizarContador } from "../utils/ui.js"
+
 
 async function renderizarCarrinho() {
 
@@ -13,6 +15,8 @@ async function renderizarCarrinho() {
 
     if(carrinho.length === 0){
         container.innerHTML = "Carrinho vazio 🛒"
+        const resumo = document.getElementById("resumo-carrinho")
+            if(resumo) resumo.style.display = "none"
         return
     }
 
@@ -23,37 +27,27 @@ async function renderizarCarrinho() {
         html += `
         
         <div class="item-carrinho">
-
             <img 
             src="${item.images ? item.images[0] : item.image}" 
-            alt="${item.title}"
-            >
-
+            alt="${item.title}">
             <div class="info-produto">
                 <h3>${item.title}</h3>
-
                 <p class="preco">R$ ${item.price}</p>
-
                 <div class="controle-quantidade">
-                <button class="btn-diminuir" data-id="${item.id}">-</button>
-
-                <span>${item.quantidade}</span>
-
-                <button class="btn-aumentar" data-id="${item.id}">+</button>
+                    <button class="btn-diminuir" data-id="${item.id}">-</button>
+                    <span>${item.quantidade}</span>
+                    <button class="btn-aumentar" data-id="${item.id}">+</button>
+                </div>
+                <button class="btn-remover" data-id="${item.id}">
+                    Remover
+                </button>
             </div>
-
-            <button class="btn-remover" data-id="${item.id}">
-                Remover
-            </button>
-            </div>
-
             <div class="subtotal">
-            <strong>Subtotal</strong>
-            <p>R$ ${(item.price * item.quantidade).toFixed(2)}</p>
+                <strong>Subtotal</strong>
+                <p>R$ ${(item.price * item.quantidade).toFixed(2)}</p>
             </div>
-
         </div>
-    `
+        `
     })
 
     container.innerHTML = html
@@ -71,41 +65,49 @@ function calcularTotal(carrinho){
         total += item.price * item.quantidade
     })
 
-    document.getElementById("total").innerHTML = "Total: R$ " + total.toFixed(2)
-}
+    const totalEl = document.getElementById("total")
+    const subtotalEl = document.getElementById("subtotal")
 
-function atualizarContador() {
-
-    const contador = document.getElementById("contador")
-
-    if(contador){
-        contador.innerText = quantidadeTotal()
-    }    
-    
+    if(totalEl && subtotalEl){
+        totalEl.innerText = `R$ ${total.toFixed(2)}`
+        subtotalEl.innerText = `R$ ${total.toFixed(2)}`
+    }
 }
 
 document.addEventListener("click", (e) => {
 
-  const id = Number(e.target.dataset.id)
+  const id = e.target.dataset.id ? Number(e.target.dataset.id) : null
 
   if(e.target.classList.contains("btn-aumentar")){
     aumentarQuantidade(id)
     renderizarCarrinho()
+    mostrarToast("Produto adicionado ao carrinho🛒")
     atualizarContador()
   }
 
   if(e.target.classList.contains("btn-diminuir")){
     diminuirQuantidade(id)
     renderizarCarrinho()
+    mostrarToast("Produto removido 🗑️")
     atualizarContador()
   }
 
   if(e.target.classList.contains("btn-remover")){
     removerProduto(id)
     renderizarCarrinho()
+    mostrarToast("Produto removido 🗑️")
     atualizarContador()
   }
 
+  if(e.target.classList.contains("btn-finalizar")){
+    mostrarToast("Compra finalizada com sucesso 🎉")
+    limparCarrinho()    
+    atualizarContador()
+
+        setTimeout(() => {
+            window.location.href = "index.html"
+        }, 1500)
+    }
 })
 
 renderizarCarrinho()

@@ -58,3 +58,7 @@ export function quantidadeTotal(){
         return total + item.quantidade
     }, 0)
 }
+
+export function limparCarrinho(){
+    localStorage.removeItem("carrinho")
+}
