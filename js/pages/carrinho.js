@@ -33,7 +33,12 @@ async function renderizarCarrinho() {
             alt="${item.title}">
             <div class="info-produto">
                 <h3>${item.title}</h3>
-                <p class="preco">R$ ${item.price}</p>
+                <p class="preco">Preço:
+                R$ ${item.price}</p>
+                <div class="subtotal">
+                    <strong>Subtotal:</strong>
+                    <p>R$ ${(item.price * item.quantidade).toFixed(2)}</p>
+                </div>
                 <div class="controle-quantidade">
                     <button class="btn-diminuir" data-id="${item.id}">-</button>
                     <span>${item.quantidade}</span>
@@ -43,10 +48,7 @@ async function renderizarCarrinho() {
                     Remover
                 </button>
             </div>
-            <div class="subtotal">
-                <strong>Subtotal</strong>
-                <p>R$ ${(item.price * item.quantidade).toFixed(2)}</p>
-            </div>
+            
         </div>
         `
     })

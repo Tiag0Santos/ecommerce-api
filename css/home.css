@@ -1,8 +1,6 @@
-.filtros {
-  display: flex;
-  justify-content: center;
+.filtros { 
   gap: 12px;
-  margin-top:  20px;
+  margin-top:  10px;
   padding: 20px 24px;
   overflow-x: auto;
 }
@@ -75,8 +73,37 @@
   background: #f7ca00;
 }
 
-@media (max-width: 768) {
+@media (max-width: 768px) {
   #lista-produtos {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .filtros{
+    display: flex;
+    overflow-x: auto;    
+    padding: 10px;
+    gap: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filtros::-webkit-scrollbar{
+    display: none;
+  }
+
+  .btn-categoria{
+    flex: 0 0 auto;
+    font-size: 12px;
+    padding: 10px;
+    white-space: nowrap;
+  }
+
+  .produto-card{
+    padding: 12px;
+  }
+
+  .produto-card img{
+    width: 120px;
+    height: 120px;
   }
 }
