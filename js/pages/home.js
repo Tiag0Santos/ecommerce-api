@@ -3,8 +3,11 @@ import { produtoCard } from "../components/produtoCard.js"
 import { adicionarProduto } from "../services/carrinhoService.js"
 import { mostrarToast, atualizarContador } from "../utils/ui.js"
 
-let produtosGlobais = []
+
 let produtosOriginais = []
+let produtosFiltrados = []
+let categoriaAtual = "todos"
+let termoBusca = ""
 
 function renderizarProdutos(produtos) {
 
@@ -36,7 +39,7 @@ document.addEventListener("click", (e) => {
 
         const id = Number(botao.dataset.id)
 
-        const produto = produtosGlobais.find(p => p.id === id)
+        const produto = produtosFiltrados.find(p => p.id === id)
 
         if(!produto) return
 
@@ -65,28 +68,42 @@ async function carregarProdutos(){
 
     const produtos = await buscarProdutos()
 
-    produtosGlobais = produtos
     produtosOriginais = produtos
 
-    renderizarProdutos(produtos)
     quantidadePorCategoria()
+
+    aplicarFiltros()
+
+    atualizarBotaoAtivo()
+}
+
+function aplicarFiltros(){
+
+    let resultado = [...produtosOriginais]
+
+    if(categoriaAtual !== "todos"){
+        resultado = resultado.filter(p => p.category === categoriaAtual)
+    }
+
+    if(termoBusca){
+        resultado = resultado.filter(p => 
+            p.title.toLowerCase().includes(termoBusca.toLowerCase())
+        )
+    }
+
+    produtosFiltrados = resultado
+
+    renderizarProdutos(resultado)
+
+    quantidadePorCategoria()
+
+    atualizarBotaoAtivo()
 }
 
 function filtrarPorCategoria(categoria){
-
-    if(categoria === "todos"){
-        produtosGlobais = produtosOriginais
-        renderizarProdutos(produtosOriginais)
-        return
-    }
-
-    const produtosFiltrados = produtosOriginais.filter(produto => 
-        produto.category === categoria
-    )
-
-    produtosGlobais = produtosFiltrados
-
-    renderizarProdutos(produtosFiltrados)
+    categoriaAtual = categoria
+    aplicarFiltros()
+    atualizarBotaoAtivo
 }
 
 function quantidadePorCategoria(){
@@ -96,21 +113,29 @@ function quantidadePorCategoria(){
     botoes.forEach(botao => {
 
         const categoria = botao.dataset.categoria
+        const nome = botao.dataset.nome
+
+        let base = [...produtosOriginais]
+
+        if(termoBusca){
+            base = base.filter(p =>
+                p.title.toLowerCase().includes(termoBusca.toLowerCase())
+            )
+        }
+
+        let quantidade
 
         if(categoria === "todos"){
-            botao.innerText = `Todos (${produtosOriginais.length})`
-            return
+            quantidade = base.length
+        } else {     
+            quantidade = base.filter(produto =>
+                produto.category === categoria
+            ).length
         }
 
-        const quatidade = produtosOriginais.filter(produto =>
-            produto.category === categoria
-        ).length
+        botao.innerText = `${nome} (${quantidade})`
 
-        botao.innerText = `${botao.dataset.nome} (${quatidade})`
-
-        if (quatidade === 0){
-            botao.style.opacity = "0.5"
-        }
+        botao.style.opacity = quantidade === 0 ? "0.5" : "1"        
     })
 }
 
@@ -124,22 +149,28 @@ const inputBusca = document.getElementById("input-busca")
 
             clearTimeout(timeout)
 
-            timeout = setTimeout(async () => {
+            timeout = setTimeout(() => {
             
-                const valor = e.target.value.trim()
+                termoBusca = e.target.value.trim()
+                aplicarFiltros()
 
-                const container = document.getElementById("produtos")
-                container.innerHTML = "Buscando..."
-
-                const produtos = await buscarProdutos(valor)
-
-                produtosGlobais = produtos
-
-                renderizarProdutos(produtos)
-
-            }, 500)
+            }, 400)
         })
     }
 
+function atualizarBotaoAtivo(){
+
+    const botoes = document.querySelectorAll(".btn-categoria")
+
+    botoes.forEach(botao => {
+        botao.classList.remove("ativo")
+
+        if(botao.dataset.categoria === categoriaAtual){
+            botao.classList.add("ativo")
+        }
+    })
+}
+
 carregarProdutos()
 atualizarContador()
+atualizarBotaoAtivo()

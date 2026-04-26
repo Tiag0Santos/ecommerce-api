@@ -15,9 +15,10 @@
 }
 
 .btn-categoria:hover,
-.btn-categoria.ativo {
-  background: #ff9900;
-  color: white;
+.btn-categoria.ativo{
+  background: #ffd814;
+  border-color: #fcd200;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
 }
 
 #produtos {
