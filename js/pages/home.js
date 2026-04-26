@@ -16,7 +16,11 @@ function renderizarProdutos(produtos) {
     if(!container) return
 
         if(produtos.length === 0){
-            container.innerHTML = "Nenhum produto encontrado"
+            container.innerHTML = `
+                <div class="empty">
+                    <p>Nenhum produto encontrado</p>
+                </div>
+                `
             return
         }
 
@@ -64,7 +68,11 @@ document.addEventListener("click", (e) => {
 async function carregarProdutos(){
 
     const container = document.getElementById("produtos")
-    container.innerHTML = "Carregando..."
+    container.innerHTML = `
+        <div class="loading">
+            <div class="spinner"></div>
+        </div>
+        `
 
     const produtos = await buscarProdutos()
 
