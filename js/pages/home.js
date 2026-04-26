@@ -111,7 +111,7 @@ function aplicarFiltros(){
 function filtrarPorCategoria(categoria){
     categoriaAtual = categoria
     aplicarFiltros()
-    atualizarBotaoAtivo
+    atualizarBotaoAtivo()
 }
 
 function quantidadePorCategoria(){
