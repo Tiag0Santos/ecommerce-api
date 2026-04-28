@@ -81,8 +81,6 @@ async function carregarProdutos(){
     quantidadePorCategoria()
 
     aplicarFiltros()
-
-    atualizarBotaoAtivo()
 }
 
 function aplicarFiltros(){
@@ -111,7 +109,6 @@ function aplicarFiltros(){
 function filtrarPorCategoria(categoria){
     categoriaAtual = categoria
     aplicarFiltros()
-    atualizarBotaoAtivo()
 }
 
 function quantidadePorCategoria(){
@@ -181,4 +178,3 @@ function atualizarBotaoAtivo(){
 
 carregarProdutos()
 atualizarContador()
-atualizarBotaoAtivo()

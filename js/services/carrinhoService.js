@@ -38,8 +38,10 @@ export function diminuirQuantidade(id){
 
     if(item && item.quantidade > 1){
         item.quantidade--
-        salvarCarrinho()
+    } else {
+        removerProduto(id)
     }
+    salvarCarrinho()
 }
 
 export function removerProduto(id){

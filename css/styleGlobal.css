@@ -6,13 +6,12 @@ body {
 
 nav {
     display: flex;
+    justify-content: space-between;
     align-items: center;   
     background: #131921;
     color: white;
     padding: 16px 24px;
 }
-
-
 
 nav a {
     margin: 10px;
@@ -31,7 +30,7 @@ nav a {
 
 .toast {
   position: fixed;
-  top: 120px;
+  top: 100px;
   right: 20px;
   background: #ffd814; 
   padding: 14px 20px;
@@ -51,10 +50,6 @@ nav a {
 
 @media (max-width: 768px) {
 
-    header h1{
-        font-size: 20px;
-    }
-
     nav{
         display: flex;
         flex-direction: column;
@@ -63,11 +58,16 @@ nav a {
     }
 
     nav h1{
+        font-size: 28px;
         margin: 10px;
     }
 
     nav a {
-        font-size: 13px;
+        font-size: 15px;
+    }
+
+    .menu{
+        text-align: center;
     }
 
     #input-busca{

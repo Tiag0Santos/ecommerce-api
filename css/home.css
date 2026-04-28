@@ -25,7 +25,8 @@
   color: #666;
 }
 
-.filtros { 
+.filtros {
+  text-align: center;
   gap: 12px;
   margin-top:  10px;
   padding: 20px 24px;
