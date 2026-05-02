@@ -54,3 +54,20 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+
+    .titulo{
+        margin: 0;
+    }
+
+    #detalhe-produto{
+       margin: 0 20px 20px 20px;
+     }
+
+     .container-produto{
+        padding: 24px;
+        text-align: center;
+     }
+    
+}

@@ -128,12 +128,12 @@
     white-space: nowrap;
   }
 
-  .produto-card{
-    padding: 12px;
-  }
-
   .produto-card img{
     width: 120px;
     height: 120px;
+  }
+  
+  .produto-card p{
+    margin: 0 0 15px 0;
   }
 }
