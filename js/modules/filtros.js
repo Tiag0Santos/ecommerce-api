@@ -74,7 +74,7 @@ function quantidadePorCategoria(){
     botoes.forEach(botao => {
 
         const categoria = botao.dataset.categoria
-        const nome = botao.textContent.split("(")[0].trim()
+        const nome = botao.dataset.nome
 
         let base = [...produtosOriginais]
 
@@ -88,7 +88,7 @@ function quantidadePorCategoria(){
             ? base.length
             : base.filter(p => p.category === categoria).length
 
-        botao.innertext = `${nome} (${quantidade})`
+        botao.innerText = `${nome} (${quantidade})`
 
         botao.style.opacity = quantidade === 0 ? "0.5" : "1"
     })
