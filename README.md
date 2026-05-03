@@ -1,9 +1,16 @@
-# 🛒 Mini E-commerce (Em Desenvolvimento)
+# 🛒 Mini E-commerce API
 
 ### Este projeto é um Mini E-commerce desenvolvido com JavaScript puro (Vanilla JS), com foco em praticar conceitos fundamentais de Front-end e simular o funcionamento de uma loja online real.
 
-⚠️ Status do projeto: Em desenvolvimento
-Estou continuamente melhorando funcionalidades, estrutura e experiência do usuário.
+---
+
+#### 🔗 Deploy: 
+https://tiagosantos-ecommerceapi.vercel.app/index.html
+
+---
+
+#### 📸 Demonstração
+<img width="1347" height="638" alt="image" src="https://github.com/user-attachments/assets/24ed74e3-8c15-43b8-a476-b113b3be9188" />
 
 ---
 
@@ -13,15 +20,21 @@ Estou continuamente melhorando funcionalidades, estrutura e experiência do usu�
 - CSS3
 - JavaScript (ES6+)
 - LocalStorage
-- API pública (DummyJSON)
+- Fetch API
+- DummyJSON API
+- Vercel
 
 ---
 
-#### 📦 Funcionalidades já implementadas
+#### 📦 Funcionalidades implementadas
 
 ✔ Listagem de produtos via API
 
 ✔ Página de detalhes do produto
+
+✔ Busca de produtos  
+
+✔ Filtro de produtos  
 
 ✔ Carrinho de compras
 
@@ -31,6 +44,8 @@ Estou continuamente melhorando funcionalidades, estrutura e experiência do usu�
 
 ✔ Persistência de dados com LocalStorage
 
+✔ Renderização dinâmica com JavaScript  
+
 ✔ Navegação entre páginas
 
 ---
@@ -39,27 +54,34 @@ Estou continuamente melhorando funcionalidades, estrutura e experiência do usu�
 
 - Manipulação do DOM
 - Event Delegation
-- Consumo de API (fetch)
-- Organização em módulos (services, pages, api)
-- Estrutura de projeto escalável
-
+- Fetch API
+- Async/Await
+- LocalStorage
+- Componentização
+- Modularização com ESModules
+- Separação de responsabilidades
+- Renderização dinâmica
+- Reutilização de código
+- Estrutura escalável
+- Organização de pastas
+- Responsividade
+- Tratamento de erros
+ 
 ---
 
-#### ⚠️ Em desenvolvimento (próximas melhorias)
+#### 🌐 API Utilizada
 
-🚧 Interface mais profissional (UI/UX)
+O projeto consome dados da API pública DummyJSON:
 
-🚧 Substituição de "alert" por notificações (toast)
+https://dummyjson.com/
 
-🚧 Sistema de busca de produtos 🔎
+Utilizada para:
 
-🚧 Loading e feedback visual
-
-🚧 Melhor tratamento de erros
-
-🚧 Responsividade para mobile 📱
-
-🚧 Melhorias no carrinho (UX e layout)
+- Produtos
+- Categorias
+- Imagens
+- Preços
+- Busca de produtos
 
 ---
 
